@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mock Interview | Interview Buddy</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 🔹 Navigation Bar -->
+  <nav>
+    <h2>Interview Buddy</h2>
+    <div class="menu">
+      <a href="index.html">Home</a>
+      <a href="mock.html" class="active">Mock Interview</a>
+      <a href="feedback.html">Feedback</a>
+    </div>
+  </nav>
+
+  <!-- 🔹 Mock Interview Section -->
+  <section class="content">
+    <h2>Mock Interview (Technical + HR)</h2>
+    <div id="question-box"></div>
+    <div id="options"></div>
+    <p id="score"></p>
+    <button id="next-btn">Next</button>
+  </section>
+
+  <!-- 🔹 Script -->
+  <script>
+    // 🧠 Question List (Line by Line in Order)
+    const questions = [
+      {
+        q: "1. What is the difference between an abstract class and an interface in Java?",
+        options: [
+          "Interface can have constructor, abstract class cannot",
+          "Abstract class can have both abstract and concrete methods, interface cannot (until Java 8)",
+          "Abstract class supports multiple inheritance",
+          "Interface is faster than abstract class"
+        ],
+        answer: 1
+      },
+      {
+        q: "2. Which SQL command is used to remove a table permanently?",
+        options: [
+          "DELETE",
+          "TRUNCATE",
+          "DROP",
+          "REMOVE"
+        ],
+        answer: 2
+      },
+      {
+        q: "3. What is a deadlock in operating systems?",
+        options: [
+          "When two processes share same data",
+          "When two or more processes wait for each other’s resources indefinitely",
+          "When CPU utilization is 100%",
+          "When memory is full"
+        ],
+        answer: 1
+      },
+      {
+        q: "4. Tell me about yourself.",
+        options: [
+          "A personal introduction including education and strengths",
+          "Only hobbies",
+          "Your favorite color",
+          "Random topic discussion"
+        ],
+        answer: 0
+      },
+      {
+        q: "5. Why should we hire you?",
+        options: [
+          "Because I need a job",
+          "Because I am passionate, skilled, and ready to contribute",
+          "Because I live near the office",
+          "Because I like your company name"
+        ],
+        answer: 1
+      }
+    ];
+
+    // 🧩 Variables
+    let index = 0;
+    let score = 0;
+
+    const qBox = document.getElementById('question-box');
+    const optionsBox = document.getElementById('options');
+    const nextBtn = document.getElementById('next-btn');
+    const scoreDisplay = document.getElementById('score');
+
+    // 🎯 Function to Show Question
+    function showQuestion() {
+      if (index < questions.length) {
+        const q = questions[index];
+        qBox.innerHTML = `<h3>${q.q}</h3>`;
+        optionsBox.innerHTML = "";
+
+        q.options.forEach((opt, i) => {
+          const btn = document.createElement("button");
+          btn.innerText = opt;
+          btn.className = "opt-btn";
+          btn.onclick = () => checkAnswer(i, btn);
+          optionsBox.appendChild(btn);
+        });
+      } else {
+        localStorage.setItem("score", score);
+        window.location.href = "result.html";
+      }
+    }
+
+    // ✅ Check Answer
+    function checkAnswer(selected, btn) {
+      const q = questions[index];
+      const allBtns = document.querySelectorAll(".opt-btn");
+
+      allBtns.forEach(b => b.disabled = true);
+      if (selected === q.answer) {
+        btn.style.background = "green";
+        score++;
+      } else {
+        btn.style.background = "red";
+        allBtns[q.answer].style.background = "green";
+      }
+
+      scoreDisplay.innerText = `Score: ${score}/${questions.length}`;
+    }
+
+    // ⏭ Next Button Click
+    nextBtn.addEventListener("click", () => {
+      index++;
+      showQuestion();
+    });
+
+    // 🚀 Start
+    showQuestion();
+  </script>
+</body>
+</html>

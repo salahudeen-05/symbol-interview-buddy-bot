@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Result</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav>
+    <h2>Interview Buddy</h2>
+    <div class="menu">
+      <a href="index.html">Home</a>
+      <a href="mock.html">Mock Interview</a>
+      <a href="feedback.html">Feedback</a>
+    </div>
+  </nav>
+
+  <section class="content">
+    <h2>🎯 Your Mock Interview Result</h2>
+    <p id="scoreDisplay"></p>
+    <a href="mock.html" class="btn">Try Again</a>
+  </section>
+
+  <script>
+    const score = localStorage.getItem("score");
+    document.getElementById("scoreDisplay").innerText =
+      `You answered ${score} out of 5 questions correctly.`;
+  </script>
+</body>
+</html>

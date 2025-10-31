@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Feedback</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav>
+    <h2>Interview Buddy</h2>
+    <div class="menu">
+      <a href="index.html">Home</a>
+      <a href="mock.html">Mock Interview</a>
+      <a href="feedback.html" class="active">Feedback</a>
+    </div>
+  </nav>
+
+  <section class="content">
+    <h2>Feedback Form 📝</h2>
+    <form onsubmit="submitForm(event)">
+      <input type="text" id="name" placeholder="Your Name" required><br>
+      <textarea id="msg" placeholder="Your Feedback" required></textarea><br>
+      <button type="submit" class="btn">Submit</button>
+    </form>
+    <p id="response"></p>
+  </section>
+
+  <script>
+    function submitForm(e) {
+      e.preventDefault();
+      document.getElementById("response").innerText = "✅ Thank you for your feedback!";
+      e.target.reset();
+    }
+  </script>
+</body>
+</html>
